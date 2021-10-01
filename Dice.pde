@@ -1,19 +1,20 @@
 die[] cube = new die[5000];
 int dn = 0;
 int totPip;
-int grid = (int)(Math.random()*20)+1;
+int grid = ((int)(Math.random()*20))+1;
 
 void setup(){
-  size(800, 800); 
+  frameRate(60);
+  size(800, 850); 
   //dice creation
   if(grid == 1){
     cube[dn] = new die(400, 400, 400);
     cube[dn].roll();
     dn++;
   }else{
-    for(int j = 800/grid; j <= 800-(800/grid); j+=1200/grid){
-      for(int i = 800/grid; i <= 800-(800/grid); i+=1200/grid){
-        cube[dn] = new die(i, j, 800/grid);
+    for(int j = 400/grid; j <= 800-(400/grid); j+=800/grid){
+      for(int i = 400/grid; i <= 800-(400/grid); i+=800/grid){
+        cube[dn] = new die(i, j, 600/grid);
         cube[dn].roll();
         dn++;
       }
@@ -28,16 +29,14 @@ void draw(){
     cube[i].show();
     cube[i].total();
   }
-  fill(0, 0, 0);
-  rect(0, 775, 800, 25);
   fill(255, 255, 255);
   textAlign(LEFT, BOTTOM);
-  textSize(20);
-  text("TOTAL PIPS: " + totPip, 10, 790);
+  textSize(25);
+  text("TOTAL PIPS: " + totPip, 10, 840);
   textAlign(CENTER, BOTTOM);
-  text("TOTAL DICE: " + dn, 400, 790);
+  text("TOTAL DICE: " + dn, 400, 840);
   textAlign(RIGHT, BOTTOM);
-  text("Click to reroll", 790, 790);
+  text("Click to reroll", 790, 840);
 }
 void mousePressed(){
   reset();
@@ -118,20 +117,18 @@ class die{
 
 void reset(){
   dn = 0;
-  grid = (int)(Math.random()*20)+1;
-  for(int j = 800/grid; j <= 800-(800/grid); j+=1200/grid){
-    for(int i = 800/grid; i <= 800-(800/grid); i+=1200/grid){
-      cube[dn] = new die(i, j, 800/grid);
-      cube[dn].roll();
-      dn++;
+  grid = ((int)(Math.random()*20))+1;
+  if(grid == 1){
+    cube[dn] = new die(400, 400, 400);
+    cube[dn].roll();
+    dn++;
+  }else{
+    for(int j = 400/grid; j <= 800-(400/grid); j+=800/grid){
+      for(int i = 400/grid; i <= 800-(400/grid); i+=800/grid){
+        cube[dn] = new die(i, j, 600/grid);
+        cube[dn].roll();
+        dn++;
+      }
     }
   }
 }
-
-
-
-
-
-
-
-
